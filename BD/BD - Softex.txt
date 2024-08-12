@@ -1,0 +1,233 @@
+Alunos: Dilson Albuquerque, Luiz Hnerique Veloso, Silvana Paiva
+
+CREATE TABLE projeto (
+    codigo CHAR(10) NOT NULL PRIMARY KEY,
+    valor DECIMAL,
+    descricao VARCHAR(40)
+);
+
+CREATE TABLE pesquisadores(
+    CPF VARCHAR(11) NOT NULL PRIMARY KEY,
+    nome VARCHAR(30),
+    instituicao VARCHAR(20),
+    data_nascimento DATE,
+	senioridade BOOLEAN,
+	codigoCargo VARCHAR(20),
+	FOREIGN KEY (codigoCargo) REFERENCES cargo(codigo)
+);
+
+CREATE TABLE comissao(
+    codigo VARCHAR(20) NOT NULL PRIMARY KEY,
+    data_criacao DATE
+);
+
+CREATE TABLE atividades(
+    codigo VARCHAR(20) NOT NULL PRIMARY KEY,
+    descricao VARCHAR(50),
+    tipo VARCHAR(40),
+    duracao TIME,
+    data_inicio DATE,
+    supervisor VARCHAR(40)
+);
+
+CREATE TABLE cargo(
+    codigo VARCHAR(20) NOT NULL PRIMARY KEY,
+    descricao VARCHAR(40)
+);
+
+
+CREATE TABLE artigo(
+    codigo VARCHAR(20) NOT NULL PRIMARY KEY,
+    nota DECIMAL,
+    idioma VARCHAR(20),
+    titulo VARCHAR(50),
+	codigoEventos VARCHAR(20) NOT NULL,
+	FOREIGN KEY (codigoEventos) REFERENCES eventos(codigo)
+);
+
+CREATE TABLE eventos(
+    codigo VARCHAR(20) NOT NULL PRIMARY KEY,
+    sigla VARCHAR(10)
+);
+
+CREATE TABLE comissao_pesquisadores(
+	codigoComissao VARCHAR(20),
+	cpfPesquisadores VARCHAR(11),
+	FOREIGN KEY (codigoComissao) REFERENCES comissao(codigo),
+	FOREIGN KEY (cpfPesquisadores) REFERENCES pesquisadores(CPF)
+);
+
+ALTER TABLE projeto
+ALTER COLUMN descricao TYPE VARCHAR(100);
+
+
+-- INSERIR EM PROJETO --
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('SIS001', '10000', 'Desenvolvimento de um Sistema Integrado de Segurança para Redes Corporativas.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('ECO002', '8500', 'Estudo de Viabilidade Econômica de Energias Renováveis em Zonas Urbanas.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('BIO003', '12000', 'Análise da Biodiversidade Marinha em Áreas Costeiras Protegidas.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('EDU004', '15300', 'Desenvolvimento de um Modelo de Ensino Híbrido para Escolas de Ensino Fundamental.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('MED005', '15100', 'Avaliação da Eficiência de Protocolos de Atendimento em Serviços de Emergência Hospitalar.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('TEC006', '9800', 'Implementação de um Sistema de Monitoramento de Tráfego em Cidades Inteligentes.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('SOC007', '11500', 'Impacto das Redes Sociais na Formação de Opinião Política entre Jovens Universitários.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('ART009', '7500', 'Análise da Influência das Artes Visuais na Percepção Estética Infantil.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PSY008', '14300', 'Estudo Longitudinal sobre os Efeitos do Estresse na Saúde Mental de Estudantes Universitários.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('ENE010', '16700', 'Desenvolvimento de um Protótipo de Carregador Solar para Dispositivos Móveis.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ001', '50000', 'Projeto de desenvolvimento de software para gerenciamento de estoque.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ002', '75000', 'Implementação de sistema de CRM para melhoria de relacionamento com clientes.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ003', '60000', 'Construção de um novo centro de distribuição para otimização logística.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ004', '23214', 'Campanha de marketing digital para lançamento de novo produto.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ005', '22300', 'Renovação completa da infraestrutura de TI para aumento de segurança e performance.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ006', '21500', 'Treinamento e capacitação de funcionários em novas tecnologias.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ007', '32040', 'Projeto de pesquisa e desenvolvimento para criação de um produto inovador.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ008', '1000', 'Implementação de um sistema de gestão ambiental para reduzir impacto ecológico.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ009', '21034', 'Expansão da rede de lojas para novas regiões metropolitanas.');
+INSERT INTO projeto(codigo, valor, descricao) VALUES ('PRJ010', '37222', 'Atualização do site corporativo com novas funcionalidades e design responsivo.');
+
+
+
+-- INSERIR EM EVENTO --
+INSERT INTO eventos(codigo, sigla) VALUES ('34', 'CES');
+INSERT INTO eventos(codigo, sigla) VALUES ('87', 'MWC');
+INSERT INTO eventos(codigo, sigla) VALUES ('12', 'WWDC');
+INSERT INTO eventos(codigo, sigla) VALUES ('56', 'IFA');
+INSERT INTO eventos(codigo, sigla) VALUES ('93', 'SXSW');
+INSERT INTO eventos(codigo, sigla) VALUES ('45', 'GDC');
+INSERT INTO eventos(codigo, sigla) VALUES ('28', 'DEFCON');
+INSERT INTO eventos(codigo, sigla) VALUES ('76', 'VMworld');
+INSERT INTO eventos(codigo, sigla) VALUES ('53', 'AWS');
+INSERT INTO eventos(codigo, sigla) VALUES ('19', 'Google I/O');
+INSERT INTO eventos(codigo, sigla) VALUES ('61', 'Build ');
+INSERT INTO eventos(codigo, sigla) VALUES ('82', 'Dreamfoce');
+INSERT INTO eventos(codigo, sigla) VALUES ('37', 'Ignite');
+INSERT INTO eventos(codigo, sigla) VALUES ('49', 'TDisrt');
+INSERT INTO eventos(codigo, sigla) VALUES ('95', 'BHT');
+INSERT INTO eventos(codigo, sigla) VALUES ('22', 'RSA');
+INSERT INTO eventos(codigo, sigla) VALUES ('68', 'SIGGRAPH');
+INSERT INTO eventos(codigo, sigla) VALUES ('74', 'NAB');
+INSERT INTO eventos(codigo, sigla) VALUES ('32', 'E3');
+INSERT INTO eventos(codigo, sigla) VALUES ('59', 'F8');
+
+
+-- INSERIR EM PESQUISADORES --
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('12345678901', 'João Silva', 'Universidade de Tecnologia de São Paulo', '1980-03-14', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('23456789012', 'Maria Oliveira', 'Instituto Federal de Tecnologia do Rio de Janeiro', '1985-07-22', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('34567890123', 'Carlos Pereira', 'Universidade de Ciências Computacionais de Minas Gerais', '1990-01-10', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('45678901234', 'Ana Souza', 'Instituto de Tecnologia de Brasília', '1982-11-05', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('56789012345', 'Pedro Santosa', 'Universidade de Tecnologia de Curitiba', '1992-08-17', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('67890123456', 'Júlia Rodrigues', 'Universidade de Ciências de Porto Alegre', '1988-04-23', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('78901234567', 'Marcos Lima', 'Universidade Federal de Tecnologia de Pernambuco', '1979-09-30', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('89012345678', 'Clara Alves', 'Instituto de Pesquisa Tecnológica do Paraná', '1995-06-15', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('90123456789', 'Lucas Mendes', 'Universidade de Tecnologia de Salvador', '1987-12-09', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('01234567890', 'Fernanda Costa', 'Universidade de Inovação Tecnológica de Manaus', '1984-03-28', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('11234567891', 'Gabriel Ferreira', 'Instituto Federal de Tecnologia do Rio de Janeiro', '1991-10-12', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('22345678912', 'Larissa Lima', 'Universidade de Tecnologia do Espírito Santo', '1983-07-04', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('33456789023', 'André Matos', 'Universidade Federal de Tecnologia do Rio Grande do Sul', '1978-05-21', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('44567890134', 'Sofia Ribeiro', 'Instituto de Tecnologia de Belém', '1994-11-18', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('55678901245', 'Renato Vieira', 'Universidade de Tecnologia de Fortaleza', '1986-02-03', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('66789012356', 'Aline Castro', 'Universidade de Tecnologia do Mato Grosso', '1981-09-27', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('77890123467', 'Thiago Nascimento', 'Instituto de Pesquisa em Tecnologia de Sergipe', '1993-12-19', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('88901234578', 'Vanessa Duarte', 'Universidade de Tecnologia de Goiás', '1989-06-06', false);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('99012345689', 'Felipe Gonçalves', 'Universidade Federal de Tecnologia do Acre', '1980-04-22', true);
+INSERT INTO pesquisadores(CPF, nome, instituicao, data_nascimento, senioridade) VALUES ('10123456780', 'Bianca Martins', 'Instituto de Tecnologia de Roraima', '1996-01-25', false);
+
+-- INSERIR EM CARGO --
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-001', 'Desenvolvedor de Software Júnior em aplicações web com JavaScript e React.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-002', 'Analista de Segurança da Informação para testes de penetração..');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-003', 'Engenheiro de Dados Sênior em pipelines usando Spark e AWS S3..');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-004', 'Arquiteto de Soluções Cloud em Azure e VMware.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-005', 'Administrador de Sistemas Linux para servidores de aplicação e banco de dados.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-006', 'UX/UI Designer em interfaces para apps móveis e web.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-007', 'Cientista de Dados Júnior em machine learning e Python.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-008', 'Engenheiro de Software Sênior em Java e Spring Boot para aplicativos empresariais.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-009', 'Especialista em Blockchain com Ethereum e smart contracts.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-010', 'Analista de Dados em SQL e BI como Tableau.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-011', 'DevOps Engineer em Jenkins, Docker e Kubernetes para microserviços.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-012', 'Engenheiro de Machine Learning em visão computacional..');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-013', 'Especialista em Segurança de Redes para proteção contra ameaças..');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-014', 'Desenvolvedor Frontend Sênior em HTML, CSS e Angular/Vue.js.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-015', 'Engenheiro de Sistemas embarcados em C/C++ para IoT.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-016', 'Analista de QA em testes funcionais e de performance.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-017', 'Gerente de Projeto de TI para implementação de ERP.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-018', 'Engenheiro de Redes para redes corporativas.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-019', 'Analista de Suporte Técnico em Windows e Linux.');
+INSERT INTO cargo(codigo, descricao) VALUES ('CT-020', 'Arquiteto de Software para definição de padrões e orientação técnica..');
+
+-- INSERIR EM COMISSÕES --
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-001', '1971-04-15');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-002', '1981-08-12');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-003', '1985-03-15');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-004', '1991-08-06');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-005', '1995-08-24');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-006', '1998-06-23');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-007', '2001-10-01');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-008', '2004-02-04');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-009', '2007-06-29');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-010', '2008-10-07');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-011', '2010-04-01');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-012', '2011-08-23');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-013', '2013-08-14');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-014', '2015-07-29');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-015', '2016-04-05');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-016', '2017-03-29');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-017', '2017-11-07');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-018', '2018-03-27');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-019', '2019-01-09');
+INSERT INTO comissao(codigo, data_criacao) VALUES ('TC-020', '2020-04-10');
+
+-- INSERIR EM COMISSÕES_PESQUISADORES -- 
+
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-002', '12345678901');
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-006', '45678901234');
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-013', '78901234567');
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-019', '33456789023');
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-018', '66789012356');
+INSERT INTO comissao_pesquisadores(codigoComissao, cpfPesquisadores) VALUES ('TC-015', '99012345689');
+
+
+-- INSERIR EM ATIVIDADES --
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV001', 'Desenvolvimento de Aplicativo Móvel', 'Desenvolvimento', '40', '2023-09-01','João Silva');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV002', 'Análise de Dados de Mercado', 'Análise', '20', '2023-09-05','Maria Oliveira');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV003', 'Configuração de Servidor Web', 'Infraestrutura', '15', '2023-09-10','Carlos Pereira');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV004', 'Implementação de Algoritmo de IA', 'Desenvolvimento', '25', '2023-09-15','Ana Souza');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV005', 'Criação de Website Institucional', 'Desenvolvimento', '30', '2023-09-20','Pedro Santos');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV006', 'Treinamento em Segurança da Informação', 'Treinamento', '08', '2023-09-25','Júlia Rodrigues');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV007', 'Pesquisa sobre Tecnologias Blockchain', 'Pesquisa', '50', '2023-10-01','Marcos Lima');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV008', 'Otimização de Banco de Dados', 'Infraestrutura', '18', '22023-10-05','Clara Alves');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV009', 'Desenvolvimento de Software de Gestão', 'Desenvolvimento', '35', '2023-10-10','Lucas Mendes');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV010', 'Testes de Aplicações Web', 'Testes', '12', '2023-10-15','Fernanda Costa');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV011', 'Desenvolvimento de Aplicativo Móvel', 'Desenvolvimento', '40', '2023-09-01','João Silva');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV012', 'Atualização de Sistemas Operacionais', 'Manutenção', '10', '2023-10-20','Gabriel Ferreira');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV013', 'Desenvolvimento de Chatbot', 'Desenvolvimento', '22', '2023-10-25','Larissa Lima');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV014', 'Implementação de Redes de Computadores', 'Infraestrutura', '28', '2023-11-01','André Matos');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV015', 'Workshop sobre Big Data', 'Treinamento', '06', '2023-11-05','Sofia Ribeiro');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV016', 'Auditoria de Sistemas de Informação', 'Auditoria', '14', '2023-11-10','Renato Vieira');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV017', 'Implementação de ERP', 'Desenvolvimento', '38', '2023-11-15','Aline Castro');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV018', 'Análise de Vulnerabilidades de Redes', 'Análise', '16', '2023-11-20','Thiago Nascimento');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV019', 'Desenvolvimento de Aplicação IoT', 'Desenvolvimento', '27', '2023-11-25','Vanessa Duarte');
+INSERT INTO atividades(codigo, descricao, tipo, duracao, data_inicio, supervisor) VALUES ('ATIV020', 'Implementação de Soluções em Nuvem', 'Infraestrutura', '24', '2023-12-01','Felipe Gonçalves');
+
+-- INSERIR EM ARTIGO--
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-001', '8.5', ' Inglês','Introdução à Inteligência Artificial','34');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-002', '7.9', ' Espanhol','Desenvolvimento de Aplicações Móveis','87');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-003', '8.0', ' Português','Cloud Computing: Fundamentos e Práticas','12');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-004', '8.5', ' Chines','Internet das Coisas (IoT): Aplicações e Tendências','56');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-005', '8.9', ' Inglês','Introdução à Inteligência Artificial','93');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-006', '8.8', ' Inglês','Desenvolvimento Ágil de Software','45');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-007', '6.7', ' Italiano','Big Data e Analytics','28');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-008', '8.9', ' Inglês','Introdução à Programação Funcional','76');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-009', '5.5', ' Coreano','Machine Learning: Algoritmos e Aplicações','53');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-010', '8.5', ' Árabe','Redes de Computadores e Segurança','19');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-011', '9.5', ' Inglês','Desenvolvimento Web Avançado','61');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-012', '8.5', ' Holandês','Inteligência Artificial na Saúde','82');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-013', '8.5', ' Inglês','Cibersegurança em Ambientes Corporativos','37');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-014', '3.5', ' Inglês','Desenvolvimento de Jogos: Teoria e Prática','49');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-015', '7.5', ' Turco','Deep Learning: Fundamentos e Aplicações','95');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-016', '3.5', ' Tailandês','Computação Quântica: Conceitos Básicos','22');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-017', '9.0', '  Hebraico','Desenvolvimento Ágil de Projetos com Scrum','68');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-018', '7.7', ' Inglês','Integração Contínua e Entrega Contínua (CI/CD)','74');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-019', '2.5', '  Finlandês','Robótica Avançada e Automação Industrial','32');
+INSERT INTO artigo(codigo, nota, idioma, titulo, codigoEventos) VALUES ('TE-020', '7.5', '  Japonês','Robótica Avançada ','59');
+
+
+
+
